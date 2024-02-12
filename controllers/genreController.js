@@ -101,7 +101,7 @@ exports.genre_delete_get = asyncHandler(async (req, res, next) => {
   });
 });
 
-// Handle Author delete on POST.
+// Handle Genre delete on POST.
 exports.genre_delete_post = asyncHandler(async (req, res, next) => {
   // Get details of genre and all their books (in parallel)
   const [genre, allBooksByGenre] = await Promise.all([
