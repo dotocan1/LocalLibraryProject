@@ -123,12 +123,54 @@ exports.genre_delete_post = asyncHandler(async (req, res, next) => {
   }
 });
 
-// Display Genre update form on GET.
+// Display genre update form on GET.
 exports.genre_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Genre update GET");
+  const genre = await Genre.findById(req.params.id).exec()
+  // Get book, authors and genres for form.
+  // const [book, allAuthors, allGenres] = await Promise.all([
+  //   Book.findById(req.params.id).populate("author").exec(),
+  //   Author.find().sort({ family_name: 1 }).exec(),
+  //   Genre.find().sort({ name: 1 }).exec(),
+  // ]);
+
+  if (genre === null) {
+    // No results.
+    const err = new Error("genre not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("genre_form", {
+    title: "Update genre",
+    genre: genre,
+  });
 });
 
-// Handle Genre update on POST.
-exports.genre_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Genre update POST");
-});
+
+// Handle genre update on POST.
+exports.genre_update_post = [
+  // Validate and sanitize fields.
+  body("name", "Genre name must contain at least 3 characters")
+    .trim()
+    .isLength({ min: 3 })
+    .escape(),
+
+  // Process request after validation and sanitization.
+  asyncHandler(async (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    // Create a genre object with escaped/trimmed data and old id.
+    const genre = new Genre({
+      name: req.body.name,
+      _id: req.params.id, // This is required, or a new ID will be assigned!
+    });
+
+    // Data from form is valid. Update the record.
+    const updatedGenre = await Genre.findByIdAndUpdate(req.params.id, genre, {});
+    // Redirect to genre detail page.
+    res.redirect(updatedGenre.url);
+
+  }),
+];
+
