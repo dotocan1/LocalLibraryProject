@@ -3,3 +3,13 @@
   padding: 0;
   list-style: none;
 }
+
+td,th{
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  padding: 1rem;
+}
+
+table,td,th{
+  border-collapse: collapse;
+}
