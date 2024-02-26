@@ -6,4 +6,9 @@ router.get('/', function(req, res, next) {
   res.redirect('/catalog');
 });
 
+/* GET votes page. */
+router.get('/voting', function(req, res, next) {
+  res.render('voting.pug');
+});
+
 module.exports = router;
