@@ -13,23 +13,22 @@ router.get('/', async function (req, res, next) {
   // connect users and yellow cards
   // Using object literal notation
   // Define an object constructor function
-  function UserForTable (name, countOfYellowCards) {
+  function UserForTable (name, countOfYellowCards, timeRemaining) {
     this.name = name;
     this.countOfYellowCards = countOfYellowCards;
+    this.timeRemaining = timeRemaining;
   }
 
   var usersForTable = [];
   for (var i = 0; i < allUsers.length; i++) {
-    var user = new UserForTable(allUsers[i].name, 0)
+    var user = new UserForTable(allUsers[i].name, 0, 0)
     for (var y = 0; y < allYellowCards.length; y++) {
-      console.log("this is running too")
       var temp1 = allUsers[i]._id;
       var temp2 = allYellowCards[y].user;
-      console.log(temp1)
-      console.log(temp2)
       if (temp1.toString() === temp2.toString()) {
-        console.log("this is running")
         user.countOfYellowCards = user.countOfYellowCards + 1;
+        console.log(allYellowCards[y].end_time)
+        user.remainingTime = new Date(allYellowCards[y].end_time);
       }
     }
     usersForTable.push(user)
