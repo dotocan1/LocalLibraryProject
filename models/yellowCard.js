@@ -8,7 +8,8 @@ const { DateTime } = require("luxon");
 
 const YellowCardSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    time_issued: { type: String, required: true, maxLength: 100 },
+    start_time: { type: String, required: true, maxLength: 100 },
+    end_time: { type: String, required: true, maxLength: 100 },
 });
 
 // Virtual for author's URL

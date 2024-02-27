@@ -14,7 +14,7 @@ table,td,th{
   border-collapse: collapse;
 }
 
-textarea, select{
+textarea, select, input{
   display: block;
 }
 

@@ -26,23 +26,8 @@ html(lang='en')
       th Ime
       th Broj zutih
       th Preostalo vrijeme zutoga kartona(u satima)
-    tr
-      td David
-      td 0
-      td 0
-    tr
-      td Dominik
-      td 0
-      td 0
-    tr
-      td Ivona
-      td 0
-      td 0
-    tr 
-      td Nikolina
-      td 0
-      td 0
-    tr 
-      td Sabrina
-      td 0
-      td 0
+    for user in user_list 
+      tr
+        td #{user.name}
+        td 0
+        td 0
