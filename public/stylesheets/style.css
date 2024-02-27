@@ -13,3 +13,12 @@ td,th{
 table,td,th{
   border-collapse: collapse;
 }
+
+textarea, select{
+  display: block;
+}
+
+.complaint-box{
+  height: 20rem;
+  width: 50rem;
+}
