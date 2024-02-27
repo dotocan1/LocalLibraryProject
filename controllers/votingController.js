@@ -26,13 +26,7 @@ exports.complaint_post = [
 
     if (!errors.isEmpty()) {
       // There are errors. Render the form again with sanitized values/error messages.
-      const allUsers = await User.find().sort({ name: 1 }).exec();
-      const allYellowCards = await YellowCard.find().exec();
-      res.render("voting", {
-        errors: errors.array(),
-        user_list: allUsers,
-        yellowcard_list: allYellowCards,
-      });
+      res.redirect('/voting');;
       return;
     } else {
       // Data from form is valid.
@@ -50,7 +44,6 @@ exports.yellowcard_post =
   asyncHandler(async (req, res, next) => {
     // Create a yelow card object with escaped and trimmed data.
     var count = req.body.count;
-    console.log(`this is the count ${count}`)
     var yellowcardArray = [];
     for (var i = 0; i < count; i++) {
       const yellowcard = new YellowCard({
@@ -60,7 +53,6 @@ exports.yellowcard_post =
       });
       yellowcardArray.push(yellowcard);
     }
-    console.log(yellowcardArray)
     // await yellowcard.save();
     yellowcardArray.forEach((item) => {
       console.log(item)

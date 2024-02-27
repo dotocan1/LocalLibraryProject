@@ -9,9 +9,36 @@ router.get('/', async function (req, res, next) {
   // Get all users
   const allUsers = await User.find().sort({ name: 1 }).exec();
   const allYellowCards = await YellowCard.find().exec();
+
+  // connect users and yellow cards
+  // Using object literal notation
+  // Define an object constructor function
+  function UserForTable (name, countOfYellowCards) {
+    this.name = name;
+    this.countOfYellowCards = countOfYellowCards;
+  }
+
+  var usersForTable = [];
+  for (var i = 0; i < allUsers.length; i++) {
+    var user = new UserForTable(allUsers[i].name, 0)
+    for (var y = 0; y < allYellowCards.length; y++) {
+      console.log("this is running too")
+      var temp1 = allUsers[i]._id;
+      var temp2 = allYellowCards[y].user;
+      console.log(temp1)
+      console.log(temp2)
+      if (temp1.toString() === temp2.toString()) {
+        console.log("this is running")
+        user.countOfYellowCards = user.countOfYellowCards + 1;
+      }
+    }
+    usersForTable.push(user)
+  }
+  console.log(usersForTable)
   res.render('voting', {
     user_list: allUsers,
     yellowcard_list: allYellowCards,
+    usersForTable: usersForTable,
   });
 });
 
