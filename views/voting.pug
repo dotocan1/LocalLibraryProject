@@ -26,8 +26,12 @@ html(lang='en')
       th Ime
       th Broj zutih
       th Preostalo vrijeme zutoga kartona(u satima)
-    for user in user_list 
+    each user in user_list 
+      - var count = 0
       tr
         td #{user.name}
-        td 0
+        each yellowcard in yellowcard_list
+          if user._id == yellowcard.user 
+          - count++ 
+        td #{count}
         td 0

@@ -27,9 +27,11 @@ exports.complaint_post = [
     if (!errors.isEmpty()) {
       // There are errors. Render the form again with sanitized values/error messages.
       const allUsers = await User.find().sort({ name: 1 }).exec();
+      const allYellowCards = await YellowCard.find().exec();
       res.render("voting", {
         errors: errors.array(),
         user_list: allUsers,
+        yellowcard_list: allYellowCards,
       });
       return;
     } else {
