@@ -83,3 +83,8 @@ h2 {
 p, label, button {
   font-size: clamp(1rem, 3vw, 3rem);
 }
+
+input[type = "number"]{
+  height: 100px;
+  font-size: clamp(1rem, 3vw, 3rem);
+}

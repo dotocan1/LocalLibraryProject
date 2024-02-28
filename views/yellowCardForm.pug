@@ -12,6 +12,6 @@ html(lang='en')
       select(name="selectedUser")
         for user in user_list
           option(value=user._id) #{user.name}
-      label Opisi razlog prijave
+      label Broj zutih kartona:
       input(type = "number",name="count")
       button(type = "submit" value = "Submit") Submit
