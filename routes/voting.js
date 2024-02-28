@@ -66,4 +66,8 @@ router.post("/post/complaint", votingController.complaint_post);
 
 // POST yellow card
 router.post("/post/yellowcard", votingController.yellowcard_post);
+
+// GET all complaints
+router.get('/complaints', votingController.complaint_list)
+
 module.exports = router;
