@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 const User = require("../models/user");
 const YellowCard = require("../models/yellowCard.js")
-var votingController = require('../controllers/votingController')
+var votingController = require('../controllers/votingController');
+const yellowCard = require('../models/yellowCard.js');
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
@@ -30,11 +31,13 @@ router.get('/', async function (req, res, next) {
         console.log(allYellowCards[y].end_time)
         var end_time = allYellowCards[y].end_time;
         var start_time = allYellowCards[y].start_time;
-
-        var remainingTime = (end_time - start_time) / (60 * 60 * 1000); // Convert milliseconds to hours
-        console.log("Remaining Time:", remainingTime, "hours");
-        user.timeRemaining = remainingTime.toFixed(1);
-        console.log(typeof(remainingTime))
+      var remainingTime = (end_time - Date.now()) / (60 * 60 * 1000); // Convert milliseconds to hours
+       if(remainingTime == 0 || remainingTime < 0){
+        await yellowCard.findByIdAndDelete(allYellowCards[y]._id);
+       }
+        else{
+          user.timeRemaining = remainingTime.toFixed(1);
+        }
       }
     }
     usersForTable.push(user)
