@@ -33,7 +33,8 @@ router.get('/', async function (req, res, next) {
 
         var remainingTime = (end_time - start_time) / (60 * 60 * 1000); // Convert milliseconds to hours
         console.log("Remaining Time:", remainingTime, "hours");
-        user.timeRemaining = remainingTime;
+        user.timeRemaining = remainingTime.toFixed(1);
+        console.log(typeof(remainingTime))
       }
     }
     usersForTable.push(user)
