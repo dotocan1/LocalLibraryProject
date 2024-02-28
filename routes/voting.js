@@ -28,7 +28,12 @@ router.get('/', async function (req, res, next) {
       if (temp1.toString() === temp2.toString()) {
         user.countOfYellowCards = user.countOfYellowCards + 1;
         console.log(allYellowCards[y].end_time)
-        user.remainingTime = new Date(allYellowCards[y].end_time);
+        var end_time = allYellowCards[y].end_time;
+        var start_time = allYellowCards[y].start_time;
+
+        var remainingTime = (end_time - start_time) / (60 * 60 * 1000); // Convert milliseconds to hours
+        console.log("Remaining Time:", remainingTime, "hours");
+        user.timeRemaining = remainingTime;
       }
     }
     usersForTable.push(user)
