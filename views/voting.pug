@@ -4,22 +4,27 @@ html(lang='en')
   head
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js", integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+", crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="preconnect",href="https://fonts.googleapis.com")
+    link(rel="preconnect",href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap",rel="stylesheet")
     title Memeovi
   div(id="main-wrapper")
     h1 Pracenje zutih kartona i prijave
     h2 Lista pravila
     p Zuti karton traje 48 sati
     p Prijava reposta(osim ako se radi o adminu) treba biti potvrdena od strane svih clanova(osim admina, uglavnom ako admin kaze da je repost a svi ostali kazu da nije, posiljatelj reela dobiva zuti karton)
-
     
-    form(action="/voting/post/complaint" method="POST")
-      label Odaberi koga prijavljujes 
-      select(name="selectedUser")
-        for user in user_list
+    
+    form(action="/voting/post/complaint", method="POST")
+      label Odaberi koga prijavljujes
+      select(name="selectedUser", placeholder="Odaberi clanano")
+        option(disabled selected) Odaberi nekoga
+        each user in user_list
           option(value=user._id) #{user.name}
       label Opisi razlog prijave
-      textarea(class = "complaint-box",name="description")
-      button(type = "submit" value = "Submit") Submit
+      textarea(class="complaint-box", name="description")
+      button(type="submit" value="Submit") Posalji
+
 
 
     table 

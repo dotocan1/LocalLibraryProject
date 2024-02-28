@@ -1,5 +1,9 @@
-html,body{
+html,
+body {
   text-align: center;
+  font-family: "Open Sans", sans-serif;
+  background: #98ABEE;
+  color: #201658;
 }
 
 .sidebar-nav {
@@ -8,35 +12,74 @@ html,body{
   list-style: none;
 }
 
-td,th{
+td,
+th {
   border-bottom: 1px solid #ddd;
   text-align: center;
   padding: 1rem;
 }
-table{
+
+table {
   width: 100%;
 }
 
-table,td,th{
+table,
+td,
+th {
   border-collapse: collapse;
+  font-size: clamp(0.5rem, 4vw, 1.5rem);
 }
 
-textarea, select, input{
+textarea,
+select,
+input {
   display: block;
   width: 100%;
 }
 
-.complaint-box{
+select{
+  height: 4rem;
+  font-size: clamp(0.5rem, 4vw, 1.5rem);
+}
+
+
+.complaint-box {
   height: 10rem;
   width: 100%;
 }
 
-form{
+form {
   padding: 20px;
 }
-#main-wrapper, form {
+
+#main-wrapper,
+form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: #F9E8C9;
+  border-radius: 50px;
+  align-self: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  justify-self: center;
+  margin: 20px;
+  padding: 20px;
+}
+
+form{
+  border: 1px solid #201658;
+  row-gap: 20px;
+}
+
+h1 {
+  font-size: clamp(3rem, 6vw, 6rem);
+}
+
+h2 {
+  font-size: clamp(3rem, 6vw, 4rem);
+}
+
+p, label, button {
+  font-size: clamp(1rem, 3vw, 3rem);
 }
