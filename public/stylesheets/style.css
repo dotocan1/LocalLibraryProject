@@ -34,7 +34,7 @@ textarea, select, input{
 form{
   padding: 20px;
 }
-#main-wrapper, form{
+#main-wrapper, form {
   display: flex;
   justify-content: center;
   align-items: center;
