@@ -36,7 +36,7 @@ router.get('/', async function (req, res, next) {
         await yellowCard.findByIdAndDelete(allYellowCards[y]._id);
        }
         else{
-          user.timeRemaining = remainingTime.toFixed(1);
+          user.timeRemaining = remainingTime.toFixed(0);
         }
       }
     }
