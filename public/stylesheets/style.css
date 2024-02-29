@@ -88,3 +88,20 @@ input[type = "number"]{
   height: 100px;
   font-size: clamp(1rem, 3vw, 3rem);
 }
+
+.complaint-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.complaint-item-box{
+  display: flex;
+  background: #F9E8C9;
+  margin: 20px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+}

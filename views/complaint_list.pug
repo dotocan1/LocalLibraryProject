@@ -8,12 +8,11 @@ html(lang='en')
     link(rel="preconnect",href="https://fonts.gstatic.com" crossorigin)
     link(href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap",rel="stylesheet")
   h1= title
-
-  #{complaint_list}
-  if complaint_list.length
-    ul
-      each complaint in complaint_list
-        li
-            ul Complaint description: #{complaint_description}
-  else
-    p There are no complaints.
+  div(class = "complaint-wrapper")
+    if complaint_list.length
+        each complaint in complaint_list
+          div(class = "complaint-item-box")
+              p User: #{complaint.user.name}
+              p Complaint description: #{complaint.description}
+    else
+      p There are no complaints.
