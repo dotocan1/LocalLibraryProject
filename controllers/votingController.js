@@ -75,7 +75,7 @@ exports.yellowcard_post =
 
   // Display list of all Genre.
 exports.complaint_list = asyncHandler(async (req, res, next) => {
-  const allComplaints = await Complaint.find().exec();
+  const allComplaints = await Complaint.find().populate("user").exec();
   res.render("complaint_list", {
     title: "Complaints List",
     complaint_list: allComplaints,
