@@ -9,10 +9,11 @@ html(lang='en')
     link(href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap",rel="stylesheet")
     title Memeovi
   div(id="main-wrapper")
-    h1 Pracenje zutih kartona i prijave
+    h1 Praćenje žutih kartona i prijave
     h2 Lista pravila
-    p Zuti karton traje 48 sati
-    p Prijava reposta(osim ako se radi o adminu) treba biti potvrdena od strane svih clanova(osim admina, uglavnom ako admin kaze da je repost a svi ostali kazu da nije, posiljatelj reela dobiva zuti karton)
+    p Žuti karton traje 48 sati
+    p Prijava reposta treba biti potvrđena od strane svih clanova(osim admina, uglavnom ako admin kaze da nije repost a svi ostali kazu da je, pošiljatelj reela tek onda dobiva žuti karton)
+    p Admin ne treba nikome dokazivati da je nešto repost
     
     
     form(action="/voting/post/complaint", method="POST")
@@ -21,7 +22,7 @@ html(lang='en')
         option(disabled selected) Odaberi nekoga
         each user in user_list
           option(value=user._id) #{user.name}
-      label Opisi razlog prijave
+      label Opiši razlog prijave
       textarea(class="complaint-box", name="description")
       button(type="submit" value="Submit") Posalji
 
