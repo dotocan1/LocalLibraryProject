@@ -15,6 +15,8 @@ html(lang='en')
     p Prijava reposta treba biti potvrđena od strane svih clanova(osim admina, uglavnom ako admin kaze da nije repost a svi ostali kazu da je, pošiljatelj reela tek onda dobiva žuti karton)
     p Admin ne treba nikome dokazivati da je nešto repost
     
+    p
+      a(href="voting/complaints") Klikni ovdje ako zelis viditi prijave
     
     form(action="/voting/post/complaint", method="POST")
       label Odaberi koga prijavljujes
@@ -22,7 +24,7 @@ html(lang='en')
         option(disabled selected) Odaberi nekoga
         each user in user_list
           option(value=user._id) #{user.name}
-      label Opiši razlog prijave
+      label Opiši razlog prijave(zasto nekoga prijavljujes, kada se desio prekrsaj)
       textarea(class="complaint-box", name="description")
       button(type="submit" value="Submit") Posalji
 

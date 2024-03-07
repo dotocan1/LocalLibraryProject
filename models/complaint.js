@@ -7,8 +7,9 @@ const { DateTime } = require("luxon");
 
 
 const ComplaintSchema = new Schema({
-  description: { type: String, required: true, maxLength: 100 },
+  description: { type: String, required: true },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  Date_issued: { type: String, required: true },
 });
 
 // Virtual for author's URL

@@ -51,7 +51,7 @@ router.get('/', async function (req, res, next) {
 });
 
 /* GET yellow card home page. */
-router.get('/yellowcard', async function (req, res, next) {
+router.get('/yellowcard2766', async function (req, res, next) {
   // Get all users
   const allUsers = await User.find().sort({ name: 1 }).exec();
 

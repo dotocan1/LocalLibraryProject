@@ -22,6 +22,7 @@ exports.complaint_post = [
     const complaint = new Complaint({
       description: req.body.description,
       user: req.body.selectedUser,
+      Date_issued: Date.now(),
     });
 
     if (!errors.isEmpty()) {
@@ -75,7 +76,7 @@ exports.yellowcard_post =
 
   // Display list of all Genre.
 exports.complaint_list = asyncHandler(async (req, res, next) => {
-  const allComplaints = await Complaint.find().populate("user").exec();
+  const allComplaints = await Complaint.find().sort({ Date_issued: -1 }).populate("user").exec();
   res.render("complaint_list", {
     title: "Complaints List",
     complaint_list: allComplaints,
