@@ -4,7 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config();
-// console.log(process.env) // remove this aft
+const session = require('express-session');
+const passport = require('passport');
+const initializePassport = require('./routes/auth');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -47,6 +49,18 @@ main().catch((err) => console.log(err));
 async function main () {
   await mongoose.connect(mongoDB);
 }
+
+// Passport configuration
+initializePassport(passport);
+
+app.use(session({
+  secret: 'secret', // Change this to a random secret in production
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(compression()); // Compress all routes
 

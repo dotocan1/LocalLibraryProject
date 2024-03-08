@@ -4,6 +4,7 @@ const User = require("../models/user");
 const YellowCard = require("../models/yellowCard.js")
 var votingController = require('../controllers/votingController');
 const yellowCard = require('../models/yellowCard.js');
+const passport = require('passport');
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
@@ -31,11 +32,11 @@ router.get('/', async function (req, res, next) {
         console.log(allYellowCards[y].end_time)
         var end_time = allYellowCards[y].end_time;
         var start_time = allYellowCards[y].start_time;
-      var remainingTime = (end_time - Date.now()) / (60 * 60 * 1000); // Convert milliseconds to hours
-       if(remainingTime == 0 || remainingTime < 0){
-        await yellowCard.findByIdAndDelete(allYellowCards[y]._id);
-       }
-        else{
+        var remainingTime = (end_time - Date.now()) / (60 * 60 * 1000); // Convert milliseconds to hours
+        if (remainingTime == 0 || remainingTime < 0) {
+          await yellowCard.findByIdAndDelete(allYellowCards[y]._id);
+        }
+        else {
           user.timeRemaining = remainingTime.toFixed(0);
         }
       }
@@ -69,5 +70,34 @@ router.post("/post/yellowcard", votingController.yellowcard_post);
 
 // GET all complaints
 router.get('/complaints', votingController.complaint_list)
+
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true // Optional, requires express-flash or connect-flash
+}));
+
+
+// Registration route
+router.post('/register', async (req, res) => {
+  try {
+    // Hash password
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    // Create a new user
+    const user = new User({
+      email: req.body.email,
+      password: hashedPassword
+    });
+
+    // Save the user to the database
+    const newUser = await user.save();
+
+    // Redirect to login or another page
+    res.redirect('/login');
+  } catch {
+    res.redirect('/register');
+  }
+});
 
 module.exports = router;
