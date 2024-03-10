@@ -4,6 +4,7 @@ const User = require("../models/user");
 const Complaint = require("../models/complaint");
 const YellowCard = require("../models/yellowCard.js")
 const { body, validationResult } = require("express-validator");
+const nodemailer = require("nodemailer");
 
 // Post a complaint
 exports.complaint_post = [
@@ -24,6 +25,97 @@ exports.complaint_post = [
       user: req.body.selectedUser,
       Date_issued: Date.now(),
     });
+
+    // send an email
+
+    const transporter = nodemailer.createTransport({
+      host: "smtp.zoho.eu",
+      port: 465,
+      secure: true, // Use `true` for port 465, `false` for all other ports
+      auth: {
+        user: "dotocan@zohomail.eu",
+        pass: "$Arn01423",
+      },
+    });
+    
+    // async..await is not allowed in global scope, must use a wrapper
+    async function main() {
+      // send mail with defined transport object
+      const info = await transporter.sendMail({
+        from: '"Ivan Kros" <dotocan@zohomail.eu>', // sender address
+        to: "dominik.otocan1@gmail.com", // list of receivers
+        subject: "Nova zalba", // Subject line
+        // text: "Nova zalba", // plain text body
+        html: `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Your Email Title</title>
+            <style>
+                /* Reset styles */
+                body, html {
+                    margin: 0;
+                    padding: 0;
+                    font-family: Arial, sans-serif;
+                    font-size: 16px;
+                    line-height: 1.6;
+                }
+                /* Wrapper for email content */
+                .email-wrapper {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                }
+                /* Styles for heading */
+                h1 {
+                    color: #333333;
+                    font-size: 24px;
+                    margin-bottom: 20px;
+                }
+                /* Styles for paragraph */
+                p {
+                    color: #666666;
+                    margin-bottom: 20px;
+                }
+                /* Styles for link */
+                a {
+                    color: #007bff;
+                    text-decoration: none;
+                }
+                /* Styles for button */
+                .btn {
+                    display: inline-block;
+                    background-color: #007bff;
+                    color: #ffffff;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    text-decoration: none;
+                }
+                /* Media query for responsive design */
+                @media only screen and (max-width: 600px) {
+                    .email-wrapper {
+                        width: 100%;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="email-wrapper">
+                <h1>Nova zalba</h1>
+                <p>Zalba: ${complaint.description}</p>
+            </div>
+        </body>
+        </html>
+        `, // html body
+      });
+    
+      console.log("Message sent: %s", info.messageId);
+      // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
+    }
+    
+    main().catch(console.error);
+
 
     if (!errors.isEmpty()) {
       // There are errors. Render the form again with sanitized values/error messages.
